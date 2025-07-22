@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Button, MenuItem, TextField, Typography } from '@mui/material';
 import { setUserInput } from '../../store/carSlice';
 
-const drivingStyles = ['Calm', 'Sporty', 'Eco', 'Mixed'];
-const safetyLevels = ['Standard', 'High', 'Maximum'];
+const drivingStyles: string[] = ['Calm', 'Sporty', 'Eco', 'Mixed'];
+const safetyLevels: string[] = ['Standard', 'High', 'Maximum'];
 
 const SearchForm: React.FC = () => {
   const dispatch = useDispatch();

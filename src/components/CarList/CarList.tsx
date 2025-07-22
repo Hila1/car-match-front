@@ -1,11 +1,12 @@
 import React from 'react';
-import { Grid } from '@mui/material';
+import { GridProps } from '@mui/material/Grid';
 import CarCard, { Car } from '../CarCard/CarCard';
+import { Grid } from '@mui/material';
 
 const CarList: React.FC<{ cars: Car[] }> = ({ cars }) => (
   <Grid container spacing={2} justifyContent="center">
     {cars.map((car, idx) => (
-      <Grid item key={idx}>
+      <Grid key={idx} {...({} as GridProps)}>
         <CarCard car={car} />
       </Grid>
     ))}
