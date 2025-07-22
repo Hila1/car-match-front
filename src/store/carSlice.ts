@@ -13,6 +13,7 @@ export interface Car {
   image: string;
   specs: string;
   manufacturerUrl: string;
+  price: number;
 }
 
 interface CarState {

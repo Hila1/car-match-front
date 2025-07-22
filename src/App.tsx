@@ -5,6 +5,8 @@ import SearchForm from './components/SearchForm/SearchForm';
 import SearchHistory from './components/SearchHistory/SearchHistory';
 import CarList from './components/CarList/CarList';
 import { Car } from './components/CarCard/CarCard';
+import Results from './pages/Results';
+import { Routes, Route } from 'react-router-dom';
 
 const mockCars: Car[] = [
   {
@@ -25,9 +27,16 @@ function App() {
   return (
     <div className="App">
       <AdBanner />
-      <SearchForm />
-      <SearchHistory />
-      <CarList cars={mockCars} />
+      <Routes>
+        <Route path="/" element={
+          <>
+            <SearchForm />
+            <SearchHistory />
+            <CarList cars={mockCars} />
+          </>
+        } />
+        <Route path="/results" element={<Results />} />
+      </Routes>
     </div>
   );
 }
