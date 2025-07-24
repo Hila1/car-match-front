@@ -3,31 +3,14 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, MenuItem, TextField, Typography } from '@mui/material';
 import { setUserInput, setCarMatches, Car } from '../../store/carSlice';
-
-const drivingStyles: string[] = ['Calm', 'Sporty', 'Eco', 'Mixed'];
-const safetyLevels: string[] = ['Standard', 'High', 'Maximum'];
-
-// Use the same mock cars as in App.tsx, but add a price property for budget filtering
-const mockCars: Car[] = [
-  {
-    model: 'Toyota Corolla',
-    image: 'https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_1280.jpg',
-    specs: '1.8L, Automatic, 5 seats, 470 trunk',
-    manufacturerUrl: 'https://www.toyota.com/corolla/',
-    price: 25000,
-  },
-  {
-    model: 'Honda Civic',
-    image: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/auto-1868726_1280.jpg',
-    specs: '2.0L, Manual, 5 seats, 430 trunk',
-    manufacturerUrl: 'https://automobiles.honda.com/civic-sedan',
-    price: 23000,
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 const SearchForm: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const drivingStyles: string[] = t('search.drivingStyles', { returnObjects: true }) as string[];
+  const safetyLevels: string[] = t('search.safetyLevels', { returnObjects: true }) as string[];
   const [form, setForm] = useState({
     passengers: '',
     trunkSize: '',
@@ -43,6 +26,22 @@ const SearchForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(setUserInput(form));
+    const mockCars: Car[] = [
+      {
+        model: 'Toyota Corolla',
+        image: 'https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_1280.jpg',
+        specs: '1.8L, Automatic, 5 seats, 470 trunk',
+        manufacturerUrl: 'https://www.toyota.com/corolla/',
+        price: 25000,
+      },
+      {
+        model: 'Honda Civic',
+        image: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/auto-1868726_1280.jpg',
+        specs: '2.0L, Manual, 5 seats, 430 trunk',
+        manufacturerUrl: 'https://automobiles.honda.com/civic-sedan',
+        price: 23000,
+      },
+    ];
     const filteredCars = mockCars.filter(car => {
       // Seats filtering: car seats >= selected passengers
       const seatsMatch = car.specs.match(/(\d+)\s*seats?/i);
@@ -68,9 +67,9 @@ const SearchForm: React.FC = () => {
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, mx: 'auto', mt: 4, p: 3, boxShadow: 2, borderRadius: 2, bgcolor: 'background.paper' }}>
-      <Typography variant="h5" mb={2}>Find Your Perfect Car</Typography>
+      <Typography variant="h5" mb={2}>{t('search.title')}</Typography>
       <TextField
-        label="Number of Passengers"
+        label={t('search.passengersLabel')}
         name="passengers"
         type="number"
         value={form.passengers}
@@ -79,7 +78,7 @@ const SearchForm: React.FC = () => {
         margin="normal"
       />
       <TextField
-        label="Trunk Size (L)"
+        label={t('search.trunkSizeLabel')}
         name="trunkSize"
         type="number"
         value={form.trunkSize}
@@ -88,7 +87,7 @@ const SearchForm: React.FC = () => {
         margin="normal"
       />
       <TextField
-        label="Budget ($)"
+        label={t('search.budgetLabel')}
         name="budget"
         type="number"
         value={form.budget}
@@ -98,7 +97,7 @@ const SearchForm: React.FC = () => {
       />
       <TextField
         select
-        label="Driving Style"
+        label={t('search.drivingStyleLabel')}
         name="drivingStyle"
         value={form.drivingStyle}
         onChange={handleChange}
@@ -111,7 +110,7 @@ const SearchForm: React.FC = () => {
       </TextField>
       <TextField
         select
-        label="Safety Level"
+        label={t('search.safetyLevelLabel')}
         name="safetyLevel"
         value={form.safetyLevel}
         onChange={handleChange}
@@ -123,7 +122,7 @@ const SearchForm: React.FC = () => {
         ))}
       </TextField>
       <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
-        Search
+        {t('search.button')}
       </Button>
     </Box>
   );
