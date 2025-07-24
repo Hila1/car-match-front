@@ -1,0 +1,17 @@
+@import '../../styles/colors.scss';
+
+// AdBanner styles
+$ad-banner-padding: 24px;
+
+.ad-banner {
+  min-height: 80px;
+  background: $color-ad-banner-bg;
+  text-align: center;
+  padding: $ad-banner-padding;
+
+  // Example for a child element using BEM
+  &__text {
+    font-weight: bold;
+    color: $color-ad-banner-text;
+  }
+} 
