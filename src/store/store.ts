@@ -1,12 +1,1 @@
-import { configureStore } from '@reduxjs/toolkit';
-import carReducer from './carSlice';
-
-const store = configureStore({
-  reducer: {
-    car: carReducer,
-  },
-});
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export default store; 
+import { configureStore } from '@reduxjs/toolkit';nimport carReducer from './carSlice';nnconst store = configureStore({n  reducer: {n    car: carReducer,n  },n});nnexport type RootState = ReturnType<typeof store.getState>;nexport type AppDispatch = typeof store.dispatch;nexport default store;
