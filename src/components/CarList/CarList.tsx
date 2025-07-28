@@ -1,16 +1,1 @@
-import React from 'react';
-import { GridProps } from '@mui/material/Grid';
-import CarCard, { Car } from '../CarCard/CarCard';
-import { Grid } from '@mui/material';
-
-const CarList: React.FC<{ cars: Car[] }> = ({ cars }) => (
-  <Grid container spacing={2} justifyContent="center">
-    {cars.map((car, idx) => (
-      <Grid key={idx} {...({} as GridProps)}>
-        <CarCard car={car} />
-      </Grid>
-    ))}
-  </Grid>
-);
-
-export default CarList; 
+import React from 'react';nimport { GridProps } from '@mui/material/Grid';nimport CarCard from '../CarCard/CarCard';nimport { Grid } from '@mui/material';nimport { Car } from '../../services/api';nnconst CarList: React.FC<{ cars: Car[] }> = ({ cars }) => (n  <Grid container spacing={2} justifyContent="center">n    {cars.map((car) => (n      <Grid key={car.id} {...({} as GridProps)}>n        <CarCard car={car} />n      </Grid>n    ))}n  </Grid>n);nnexport default CarList;
