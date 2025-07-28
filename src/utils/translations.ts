@@ -38,4 +38,4 @@ export const t = (key: string): string => {
 export const getArray = (key: string): string[] => {
   const value = getNestedValue(translations, key);
   return Array.isArray(value) ? value : [];
-}; 
+};
