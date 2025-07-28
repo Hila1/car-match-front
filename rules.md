@@ -51,4 +51,44 @@
 
 ## 12. Documentation
 - Document complex logic with comments.
-- Keep the README up to date. 
+- Keep the README up to date.
+
+## 13. Performance Guidelines
+- Use React.memo() for expensive components that re-render frequently.
+- Implement proper dependency arrays in useEffect hooks.
+- Avoid creating objects/functions inside render methods.
+- Use useCallback and useMemo for expensive computations.
+
+## 14. Accessibility (A11y)
+- Always include alt text for images.
+- Use semantic HTML elements (button, nav, main, etc.).
+- Ensure proper keyboard navigation.
+- Maintain sufficient color contrast ratios.
+- Use ARIA labels where appropriate.
+
+## 15. Error Handling
+- Implement proper error boundaries for React components.
+- Handle API errors gracefully with user-friendly messages.
+- Log errors appropriately for debugging.
+- Provide fallback UI for failed states.
+
+## 16. Security Best Practices
+- Sanitize user inputs before rendering.
+- Use HTTPS in production.
+- Implement proper CORS policies.
+- Avoid storing sensitive data in localStorage.
+- Validate all API responses.
+
+## 17. Code Review Standards
+- Review for functionality, performance, and security.
+- Check for proper error handling.
+- Ensure accessibility compliance.
+- Verify TypeScript types are correct.
+- Confirm styling follows design system.
+
+## 18. Deployment Guidelines
+- Use environment variables for configuration.
+- Implement proper build optimization.
+- Set up CI/CD pipelines.
+- Monitor application performance.
+- Implement proper logging and error tracking.
