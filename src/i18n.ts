@@ -1,16 +1,1 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import en from './locales/en';
-
-i18n
-  .use(initReactI18next)
-  .init({
-    resources: {
-      en: { translation: en }
-    },
-    lng: 'en',
-    fallbackLng: 'en',
-    interpolation: { escapeValue: false }
-  });
-
-export default i18n; 
+import i18n from 'i18next';nimport { initReactI18next } from 'react-i18next';nimport en from './locales/en';nni18nn  .use(initReactI18next)n  .init({n    resources: {n      en: { translation: en }n    },n    lng: 'en',n    fallbackLng: 'en',n    interpolation: { escapeValue: false }n  });nnexport default i18n;
