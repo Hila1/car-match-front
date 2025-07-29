@@ -1,1 +1,8 @@
-import React from 'react';nimport { t } from '../../utils/translations';nnconst SearchHistory: React.FC = () => {n  return <div>{t('searchHistory.placeholder')}</div>;n};nnexport default SearchHistory;
+import React from 'react';
+import { t } from '../../utils/translations';
+
+const SearchHistory: React.FC = () => {
+  return <div>{t('searchHistory.placeholder')}</div>;
+};
+
+export default SearchHistory; 

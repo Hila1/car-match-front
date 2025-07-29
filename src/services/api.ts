@@ -1,1 +1,109 @@
-const API_BASE_URL = 'http://localhost:8000';nnexport interface Car {n  id: number;n  make: string;n  model: string;n  year: number;n  color?: string;n}nnexport interface CarCreate {n  make: string;n  model: string;n  year: number;n  color?: string;n}nnexport interface CarUpdate {n  make?: string;n  model?: string;n  year?: number;n  color?: string;n}nnexport const carApi = {n  // Get all carsn  async getCars(): Promise<Car[]> {n    const response = await fetch(`${API_BASE_URL}/cars/`);n    if (!response.ok) {n      throw new Error('Failed to fetch cars');n    }n    return response.json();n  },nn  // Get a single car by IDn  async getCar(id: number): Promise<Car> {n    const response = await fetch(`${API_BASE_URL}/cars/${id}`);n    if (!response.ok) {n      throw new Error('Failed to fetch car');n    }n    return response.json();n  },nn  // Create a new carn  async createCar(car: CarCreate): Promise<Car> {n    const response = await fetch(`${API_BASE_URL}/cars/`, {n      method: 'POST',n      headers: {n        'Content-Type': 'application/json',n      },n      body: JSON.stringify(car),n    });n    if (!response.ok) {n      throw new Error('Failed to create car');n    }n    return response.json();n  },nn  // Update a carn  async updateCar(id: number, car: CarUpdate): Promise<Car> {n    const response = await fetch(`${API_BASE_URL}/cars/${id}`, {n      method: 'PUT',n      headers: {n        'Content-Type': 'application/json',n      },n      body: JSON.stringify(car),n    });n    if (!response.ok) {n      throw new Error('Failed to update car');n    }n    return response.json();n  },nn  // Delete a carn  async deleteCar(id: number): Promise<void> {n    const response = await fetch(`${API_BASE_URL}/cars/${id}`, {n      method: 'DELETE',n    });n    if (!response.ok) {n      throw new Error('Failed to delete car');n    }n  },n};nnexport const searchHistoryApi = {n  // Get search historyn  async getSearchHistory(): Promise<string[]> {n    const response = await fetch(`${API_BASE_URL}/search-history/`);n    if (!response.ok) {n      throw new Error('Failed to fetch search history');n    }n    return response.json();n  },nn  // Add search query to historyn  async addSearchQuery(query: string): Promise<string[]> {n    const response = await fetch(`${API_BASE_URL}/search-history/`, {n      method: 'POST',n      headers: {n        'Content-Type': 'application/json',n      },n      body: JSON.stringify(query),n    });n    if (!response.ok) {n      throw new Error('Failed to add search query');n    }n    return response.json();n  },n};
+const API_BASE_URL = 'http://localhost:8000';
+
+export interface Car {
+  id: number;
+  make: string;
+  model: string;
+  year: number;
+  color?: string;
+}
+
+export interface CarCreate {
+  make: string;
+  model: string;
+  year: number;
+  color?: string;
+}
+
+export interface CarUpdate {
+  make?: string;
+  model?: string;
+  year?: number;
+  color?: string;
+}
+
+export const carApi = {
+  // Get all cars
+  async getCars(): Promise<Car[]> {
+    const response = await fetch(`${API_BASE_URL}/cars/`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch cars');
+    }
+    return response.json();
+  },
+
+  // Get a single car by ID
+  async getCar(id: number): Promise<Car> {
+    const response = await fetch(`${API_BASE_URL}/cars/${id}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch car');
+    }
+    return response.json();
+  },
+
+  // Create a new car
+  async createCar(car: CarCreate): Promise<Car> {
+    const response = await fetch(`${API_BASE_URL}/cars/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(car),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to create car');
+    }
+    return response.json();
+  },
+
+  // Update a car
+  async updateCar(id: number, car: CarUpdate): Promise<Car> {
+    const response = await fetch(`${API_BASE_URL}/cars/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(car),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to update car');
+    }
+    return response.json();
+  },
+
+  // Delete a car
+  async deleteCar(id: number): Promise<void> {
+    const response = await fetch(`${API_BASE_URL}/cars/${id}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error('Failed to delete car');
+    }
+  },
+};
+
+export const searchHistoryApi = {
+  // Get search history
+  async getSearchHistory(): Promise<string[]> {
+    const response = await fetch(`${API_BASE_URL}/search-history/`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch search history');
+    }
+    return response.json();
+  },
+
+  // Add search query to history
+  async addSearchQuery(query: string): Promise<string[]> {
+    const response = await fetch(`${API_BASE_URL}/search-history/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(query),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to add search query');
+    }
+    return response.json();
+  },
+}; 

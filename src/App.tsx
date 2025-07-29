@@ -1,1 +1,45 @@
-import React, { useEffect } from 'react';nimport './App.css';nimport AdBanner from './components/AdBanner/AdBanner';nimport SearchForm from './components/SearchForm/SearchForm';nimport SearchHistory from './components/SearchHistory/SearchHistory';nimport CarList from './components/CarList/CarList';nimport Results from './pages/Results';nimport { Routes, Route } from 'react-router-dom';nimport { useSelector, useDispatch } from 'react-redux';nimport { RootState, AppDispatch } from './store/store';nimport { fetchCars } from './store/carSlice';nimport { CircularProgress, Box } from '@mui/material';nnfunction App() {n  const { cars, loading } = useSelector((state: RootState) => state.car);n  const dispatch = useDispatch<AppDispatch>();nn  useEffect(() => {n    dispatch(fetchCars());n  }, [dispatch]);nn  return (n    <div className="App">n      <AdBanner />n      <Routes>n        <Route path="/" element={n          <>n            <SearchForm />n            <SearchHistory />n            {loading ? (n              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>n                <CircularProgress />n              </Box>n            ) : (n              <CarList cars={cars} />n            )}n          </>n        } />n        <Route path="/results" element={<Results />} />n      </Routes>n    </div>n  );n}nnexport default App;
+import React, { useEffect } from 'react';
+import './App.css';
+import AdBanner from './components/AdBanner/AdBanner';
+import SearchForm from './components/SearchForm/SearchForm';
+import SearchHistory from './components/SearchHistory/SearchHistory';
+import CarList from './components/CarList/CarList';
+import Results from './pages/Results';
+import { Routes, Route } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from './store/store';
+import { fetchCars } from './store/carSlice';
+import { CircularProgress, Box } from '@mui/material';
+
+function App() {
+  const { cars, loading } = useSelector((state: RootState) => state.car);
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchCars());
+  }, [dispatch]);
+
+  return (
+    <div className="App">
+      <AdBanner />
+      <Routes>
+        <Route path="/" element={
+          <>
+            <SearchForm />
+            <SearchHistory />
+            {loading ? (
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+                <CircularProgress />
+              </Box>
+            ) : (
+              <CarList cars={cars} />
+            )}
+          </>
+        } />
+        <Route path="/results" element={<Results />} />
+      </Routes>
+    </div>
+  );
+}
+
+export default App;

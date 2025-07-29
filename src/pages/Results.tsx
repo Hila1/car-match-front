@@ -1,1 +1,64 @@
-import React, { useEffect } from 'react';nimport { useSelector, useDispatch } from 'react-redux';nimport CarList from '../components/CarList/CarList';nimport { RootState, AppDispatch } from '../store/store';nimport { Typography, Box, Button, CircularProgress, Alert } from '@mui/material';nimport { useNavigate } from 'react-router-dom';nimport { fetchCars } from '../store/carSlice';nimport { t } from '../utils/translations';nnconst Results: React.FC = () => {n  const { cars, loading, error } = useSelector((state: RootState) => state.car);n  const dispatch = useDispatch<AppDispatch>();n  const navigate = useNavigate();nn  useEffect(() => {n    dispatch(fetchCars());n  }, [dispatch]);nn  if (loading) {n    return (n      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>n        <CircularProgress />n      </Box>n    );n  }nn  if (error) {n    return (n      <Box sx={{ mt: 4 }}>n        <Alert severity="error" sx={{ mb: 2 }}>n          {error}n        </Alert>n        <Box sx={{ display: 'flex', justifyContent: 'center' }}>n          <Button variant="contained" color="primary" onClick={() => navigate('/')}>n            {t('results.newSearch')}n          </Button>n        </Box>n      </Box>n    );n  }nn  return (n    <Box sx={{ mt: 4 }}>n      <Typography variant="h4" align="center" gutterBottom>n        {t('results.title')}n      </Typography>n      {cars && cars.length > 0 ? (n        <CarList cars={cars} />n      ) : (n        <Typography align="center" color="text.secondary">n          {t('results.noCars')}n        </Typography>n      )}n      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>n        <Button variant="contained" color="primary" onClick={() => navigate('/')}>n          {t('results.newSearch')}n        </Button>n      </Box>n    </Box>n  );n};nnexport default Results;
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import CarList from '../components/CarList/CarList';
+import { RootState, AppDispatch } from '../store/store';
+import { Typography, Box, Button, CircularProgress, Alert } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { fetchCars } from '../store/carSlice';
+import { t } from '../utils/translations';
+
+const Results: React.FC = () => {
+  const { cars, loading, error } = useSelector((state: RootState) => state.car);
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(fetchCars());
+  }, [dispatch]);
+
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <Box sx={{ mt: 4 }}>
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Button variant="contained" color="primary" onClick={() => navigate('/')}>
+            {t('results.newSearch')}
+          </Button>
+        </Box>
+      </Box>
+    );
+  }
+
+  return (
+    <Box sx={{ mt: 4 }}>
+      <Typography variant="h4" align="center" gutterBottom>
+        {t('results.title')}
+      </Typography>
+      {cars && cars.length > 0 ? (
+        <CarList cars={cars} />
+      ) : (
+        <Typography align="center" color="text.secondary">
+          {t('results.noCars')}
+        </Typography>
+      )}
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+        <Button variant="contained" color="primary" onClick={() => navigate('/')}>
+          {t('results.newSearch')}
+        </Button>
+      </Box>
+    </Box>
+  );
+};
+
+export default Results; 
+
