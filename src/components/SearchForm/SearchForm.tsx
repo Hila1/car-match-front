@@ -1,1 +1,96 @@
-import React, { useState } from 'react';nimport { useDispatch } from 'react-redux';nimport { useNavigate } from 'react-router-dom';nimport { Box, Button, MenuItem, TextField, Typography } from '@mui/material';nimport { setUserInput } from '../../store/carSlice';nimport { t, getArray } from '../../utils/translations';nnconst SearchForm: React.FC = () => {n  const dispatch = useDispatch();n  const navigate = useNavigate();n  const drivingStyles = getArray('search.drivingStyles');n  const safetyLevels = getArray('search.safetyLevels');n  const [form, setForm] = useState({n    passengers: '',n    trunkSize: '',n    budget: '',n    drivingStyle: '',n    safetyLevel: '',n  });nn  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {n    setForm({ ...form, [e.target.name]: e.target.value });n  };nn  const handleSubmit = (e: React.FormEvent) => {n    e.preventDefault();n    dispatch(setUserInput(form));n    // TODO: Implement search filtering with backend APIn    // For now, just navigate to results pagen    navigate('/results');n  };nn  return (n    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, mx: 'auto', mt: 4, p: 3, boxShadow: 2, borderRadius: 2, bgcolor: 'background.paper' }}>n      <Typography variant="h5" mb={2}>{t('search.title')}</Typography>n      <TextFieldn        label={t('search.passengersLabel')}n        name="passengers"n        type="number"n        value={form.passengers}n        onChange={handleChange}n        fullWidthn        margin="normal"n      />n      <TextFieldn        label={t('search.trunkSizeLabel')}n        name="trunkSize"n        type="number"n        value={form.trunkSize}n        onChange={handleChange}n        fullWidthn        margin="normal"n      />n      <TextFieldn        label={t('search.budgetLabel')}n        name="budget"n        type="number"n        value={form.budget}n        onChange={handleChange}n        fullWidthn        margin="normal"n      />n      <TextFieldn        selectn        label={t('search.drivingStyleLabel')}n        name="drivingStyle"n        value={form.drivingStyle}n        onChange={handleChange}n        fullWidthn        margin="normal"n      >n        {drivingStyles.map((style: string) => (n          <MenuItem key={style} value={style}>{style}</MenuItem>n        ))}n      </TextField>n      <TextFieldn        selectn        label={t('search.safetyLevelLabel')}n        name="safetyLevel"n        value={form.safetyLevel}n        onChange={handleChange}n        fullWidthn        margin="normal"n      >n        {safetyLevels.map((level: string) => (n          <MenuItem key={level} value={level}>{level}</MenuItem>n        ))}n      </TextField>n      <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>n        {t('search.button')}n      </Button>n    </Box>n  );n};nnexport default SearchForm;
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Box, Button, MenuItem, TextField, Typography } from '@mui/material';
+import { setUserInput } from '../../store/carSlice';
+import { t, getArray } from '../../utils/translations';
+
+const SearchForm: React.FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const drivingStyles = getArray('search.drivingStyles');
+  const safetyLevels = getArray('search.safetyLevels');
+  const [form, setForm] = useState({
+    passengers: '',
+    trunkSize: '',
+    budget: '',
+    drivingStyle: '',
+    safetyLevel: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(setUserInput(form));
+    // TODO: Implement search filtering with backend API
+    // For now, just navigate to results page
+    navigate('/results');
+  };
+
+  return (
+    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400, mx: 'auto', mt: 4, p: 3, boxShadow: 2, borderRadius: 2, bgcolor: 'background.paper' }}>
+      <Typography variant="h5" mb={2}>{t('search.title')}</Typography>
+      <TextField
+        label={t('search.passengersLabel')}
+        name="passengers"
+        type="number"
+        value={form.passengers}
+        onChange={handleChange}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        label={t('search.trunkSizeLabel')}
+        name="trunkSize"
+        type="number"
+        value={form.trunkSize}
+        onChange={handleChange}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        label={t('search.budgetLabel')}
+        name="budget"
+        type="number"
+        value={form.budget}
+        onChange={handleChange}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        select
+        label={t('search.drivingStyleLabel')}
+        name="drivingStyle"
+        value={form.drivingStyle}
+        onChange={handleChange}
+        fullWidth
+        margin="normal"
+      >
+        {drivingStyles.map((style: string) => (
+          <MenuItem key={style} value={style}>{style}</MenuItem>
+        ))}
+      </TextField>
+      <TextField
+        select
+        label={t('search.safetyLevelLabel')}
+        name="safetyLevel"
+        value={form.safetyLevel}
+        onChange={handleChange}
+        fullWidth
+        margin="normal"
+      >
+        {safetyLevels.map((level: string) => (
+          <MenuItem key={level} value={level}>{level}</MenuItem>
+        ))}
+      </TextField>
+      <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+        {t('search.button')}
+      </Button>
+    </Box>
+  );
+};
+
+export default SearchForm; 

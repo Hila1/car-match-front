@@ -1,1 +1,60 @@
-import React from 'react';nimport { Card, CardContent, CardMedia, Typography, Button, Box } from '@mui/material';nimport { Car } from '../../services/api';nimport { t } from '../../utils/translations';nn// Mock data for display purposes (in a real app, this would come from the backend)nconst getCarImage = (make: string, model: string): string => {n  const carImages: { [key: string]: string } = {n    'Toyota Corolla': 'https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_1280.jpg',n    'Honda Civic': 'https://cdn.pixabay.com/photo/2016/11/29/09/32/auto-1868726_1280.jpg',n    'Ford Focus': 'https://cdn.pixabay.com/photo/2016/11/29/09/32/auto-1868726_1280.jpg',n    'default': 'https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_1280.jpg',n  };n  n  const key = `${make} ${model}`;n  return carImages[key] || carImages.default;n};nnconst getManufacturerUrl = (make: string): string => {n  const urls: { [key: string]: string } = {n    'Toyota': 'https://www.toyota.com/',n    'Honda': 'https://automobiles.honda.com/',n    'Ford': 'https://www.ford.com/',n    'default': 'https://www.google.com/search?q=' + encodeURIComponent(make),n  };n  n  return urls[make] || urls.default;n};nnconst CarCard: React.FC<{ car: Car }> = ({ car }) => {n  const imageUrl = getCarImage(car.make, car.model);n  const manufacturerUrl = getManufacturerUrl(car.make);n  const specs = `${car.year} ${car.make} ${car.model}${car.color ? ` - ${car.color}` : ''}`;n  n  return (n    <Card sx={{ maxWidth: 345, m: 2 }}>n      <CardMedian        component="img"n        height="180"n        image={imageUrl}n        alt={`${car.make} ${car.model}`}n      />n      <CardContent>n        <Typography gutterBottom variant="h6" component="div">n          {car.make} {car.model}n        </Typography>n        <Typography variant="body2" color="text.secondary">n          {specs}n        </Typography>n        <Box mt={2}>n          <Button variant="outlined" color="primary" href={manufacturerUrl} target="_blank" rel="noopener">n            {t('carCard.details')}n          </Button>n        </Box>n      </CardContent>n    </Card>n  );n};nnexport default CarCard;
+import React from 'react';
+import { Card, CardContent, CardMedia, Typography, Button, Box } from '@mui/material';
+import { Car } from '../../services/api';
+import { t } from '../../utils/translations';
+
+// Mock data for display purposes (in a real app, this would come from the backend)
+const getCarImage = (make: string, model: string): string => {
+  const carImages: { [key: string]: string } = {
+    'Toyota Corolla': 'https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_1280.jpg',
+    'Honda Civic': 'https://cdn.pixabay.com/photo/2016/11/29/09/32/auto-1868726_1280.jpg',
+    'Ford Focus': 'https://cdn.pixabay.com/photo/2016/11/29/09/32/auto-1868726_1280.jpg',
+    'default': 'https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_1280.jpg',
+  };
+  
+  const key = `${make} ${model}`;
+  return carImages[key] || carImages.default;
+};
+
+const getManufacturerUrl = (make: string): string => {
+  const urls: { [key: string]: string } = {
+    'Toyota': 'https://www.toyota.com/',
+    'Honda': 'https://automobiles.honda.com/',
+    'Ford': 'https://www.ford.com/',
+    'default': 'https://www.google.com/search?q=' + encodeURIComponent(make),
+  };
+  
+  return urls[make] || urls.default;
+};
+
+const CarCard: React.FC<{ car: Car }> = ({ car }) => {
+  const imageUrl = getCarImage(car.make, car.model);
+  const manufacturerUrl = getManufacturerUrl(car.make);
+  const specs = `${car.year} ${car.make} ${car.model}${car.color ? ` - ${car.color}` : ''}`;
+  
+  return (
+    <Card sx={{ maxWidth: 345, m: 2 }}>
+      <CardMedia
+        component="img"
+        height="180"
+        image={imageUrl}
+        alt={`${car.make} ${car.model}`}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h6" component="div">
+          {car.make} {car.model}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {specs}
+        </Typography>
+        <Box mt={2}>
+          <Button variant="outlined" color="primary" href={manufacturerUrl} target="_blank" rel="noopener">
+            {t('carCard.details')}
+          </Button>
+        </Box>
+      </CardContent>
+    </Card>
+  );
+};
+
+export default CarCard; 
